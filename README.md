@@ -2,6 +2,17 @@
 
 This project contains automated tests for the Practice Software Testing website using WebDriverIO (WDIO) with Cucumber BDD framework.
 
+## Original Task Description:
+
+1. Walk through the provided materials (official documentation, video) to understand how WDIO works and the main benefits of the tool.
+2. Create an initial setup of WDIO on the local machine
+3. Create WDIO config if it does not exist and familiarize
+4. Create first specs using the existing BDD scenario created in Module 2
+5. Execute these tests using CLI in different browsers (Chrome, Firefox, Safari) in headless mode
+6. Execute tests in parallel using 2 instances
+7. Add the option to run tests 2 times before marking it as failed
+8. Push the code to remote repository and create Merge Request
+
 ## 🚀 Project Overview
 
 This automation framework tests 8 key scenarios (created in module 2):
