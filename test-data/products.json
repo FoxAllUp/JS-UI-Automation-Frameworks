@@ -1,0 +1,17 @@
+{
+    "searchTerms": {
+      "pliers": "pliers",
+      "hammer": "hammer",
+      "screwdriver": "screwdriver"
+    },
+    "quantities": {
+      "single": "1",
+      "multiple": "2",
+      "bulk": "5"
+    },
+    "languages": {
+      "english": "en",
+      "spanish": "es",
+      "french": "fr"
+    }
+  }
