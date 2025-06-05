@@ -13,8 +13,8 @@
       "phone": "+1234567890"
     },
     "existingUser": {
-      "email": "existing.user@example.com",
-      "password": "ExistingPassword123!"
+      "email": "customer@practicesoftwaretesting.com",
+      "password": "welcome01"
     },
     "billingInfo": {
       "firstName": "John",
