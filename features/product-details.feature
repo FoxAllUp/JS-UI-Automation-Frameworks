@@ -3,9 +3,14 @@ Feature: View Product Details
   I want to view detailed information about products
   So that I can make informed purchasing decisions
 
-  Scenario: User views detailed information about a specific product
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User views details of a specific product
     Given I am on the Practice Software Testing homepage
-    When I click on a product from the product list
-    And I am redirected to the product details page
-    And I can see the product image, description, and price
-    Then I should see all relevant product information including specifications and reviews
+    When I click on a product card
+    Then I should be redirected to the Product Details page
+    And I should see the product's image
+    And I should see the product's name
+    And I should see the product's description
+    And I should see the product's price

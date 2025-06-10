@@ -10,8 +10,19 @@
       "bulk": "5"
     },
     "languages": {
+      "german": "de",
       "english": "en",
       "spanish": "es",
-      "french": "fr"
+      "french": "fr",
+      "dutch": "nl",
+      "turkish": "tr"
+    },
+    "homeInDifferentLanguages": {
+      "de": "Home",
+      "en": "Home",
+      "es": "Inicio",
+      "fr": "Accueil",
+      "nl": "Home",
+      "tr": "Anasayfa"
     }
   }

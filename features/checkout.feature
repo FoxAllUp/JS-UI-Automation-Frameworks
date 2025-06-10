@@ -3,10 +3,20 @@ Feature: Complete Checkout Process
   I want to complete my purchase
   So that I can receive the products I want
 
-  Scenario: User successfully completes a purchase
-    Given I have products in my shopping cart
-    And I am logged into my account
-    When I proceed to checkout
-    And I fill in my billing and shipping information
-    And I select a payment method and confirm the order
-    Then I should receive an order confirmation with order details
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User completes the checkout process
+    Given I am on the Practice Software Testing homepage
+    And I am logged in
+    When I go back to homepage
+    And I have at least one product in my shopping cart
+    And I click on the first "Proceed to checkout" button
+    And I click on the second "Proceed to checkout" button
+    And I fill in the Billing Address fields with valid information
+    And I click on the third "Proceed to checkout" button
+    And I select a payment method
+    And I click on "Confirm" button
+    Then I should see a "Payment was successful" message
+    When I click on "Confirm" button
+    Then I should see an order confirmation message with order number

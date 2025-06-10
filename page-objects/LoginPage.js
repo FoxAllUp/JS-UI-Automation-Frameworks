@@ -22,7 +22,7 @@ class LoginPage extends BasePage {
     get errorMessage() { return $('.alert-danger'); }
 
     async clickRegisterLink() {
-        await this.registerLink.waitForDisplayed({ timeout: 10000 });
+//        await this.registerLink.waitForDisplayed();
         await this.registerLink.click();
     }
 
@@ -32,9 +32,12 @@ class LoginPage extends BasePage {
         await this.lastNameInput.setValue(userData.lastName);
 
 //        await this.dobInput.setValue(userData.dob);
-        this.dobInput.value = userData.dob;
-        await this.dobInput.dispatchEvent(new Event('input', { bubbles: true }));
-        await this.dobInput.dispatchEvent(new Event('change', { bubbles: true }));
+
+        await this.dobInput.click();
+        await this.dobInput.setValue('1990');
+        await browser.keys('Tab');
+        await browser.keys(['0', '1', '0', '1']);
+
 
         await this.streetInput.setValue(userData.street);
         await this.postcodeInput.setValue(userData.postcode);
@@ -48,7 +51,6 @@ class LoginPage extends BasePage {
 
     async submitRegistration() {
         await this.registerButton.click();
-        await browser.pause(3000); // Wait for registration to process
     }
 
     async login(email, password) {

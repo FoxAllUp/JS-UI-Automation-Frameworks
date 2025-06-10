@@ -16,20 +16,20 @@ class CheckoutPage extends BasePage {
     get creditCardOption() { return $('[data-test="payment-method-1"]'); }
     get bankTransferOption() { return $('[data-test="payment-method-2"]'); }
     get giftCardOption() { return $('[data-test="payment-method-3"]'); }
+    get cashOption() { return $('[value="cash-on-delivery"]'); }
     
     get confirmOrderButton() { return $('[data-test="finish"]'); }
-    get orderConfirmation() { return $('[data-test="order-confirmation"]'); }
+    get orderConfirmation() { return $('[id=order-confirmation]'); }
     get orderNumber() { return $('[data-test="order-number"]'); }
 
+    get successMessage() { return $('[data-test="payment-success-message"]'); }
+
     async fillBillingInformation(billingData) {
-        await this.firstNameInput.waitForDisplayed({ timeout: 10000 });
-        await this.firstNameInput.setValue(billingData.firstName);
-        await this.lastNameInput.setValue(billingData.lastName);
-        await this.addressInput.setValue(billingData.address);
+        await this.addressInput.setValue(billingData.street);
         await this.cityInput.setValue(billingData.city);
         await this.stateInput.setValue(billingData.state);
+        await this.countrySelect.setValue(billingData.country);
         await this.postcodeInput.setValue(billingData.postcode);
-        await this.countrySelect.selectByVisibleText(billingData.country);
     }
 
     async proceedToPayment() {
@@ -38,8 +38,11 @@ class CheckoutPage extends BasePage {
         await browser.pause(2000);
     }
 
-    async selectPaymentMethod(method = 'credit-card') {
+    async selectPaymentMethod(method = 'cash') {
         switch (method) {
+            case 'cash':
+                await this.cashOption.click();
+                break;
             case 'credit-card':
                 await this.creditCardOption.waitForDisplayed({ timeout: 10000 });
                 await this.creditCardOption.click();

@@ -25,6 +25,9 @@ class TestDataManager {
     static getLanguage(lang = 'english') {
         return products.languages[lang] || 'en';
     }
+    static getHomeText(lang = 'en') {
+        return products.homeInDifferentLanguages[lang] || 'Home';
+    }
 
     static generateRandomEmail() {
         const timestamp = Date.now();

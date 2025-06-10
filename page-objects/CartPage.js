@@ -1,20 +1,21 @@
 const BasePage = require('./BasePage');
 
 class CartPage extends BasePage {
-    get cartIcon() { return $('[data-test="nav-cart"]'); }
+    get cartIcon() { return $('[data-icon="cart-shopping"]'); }
     get cartItems() { return $$('[data-test="cart-item"]'); }
     get cartTotal() { return $('[data-test="cart-total"]'); }
+    get anyCheckoutButton() { return $('[data-test^="proceed-"]'); }
     get checkoutButton() { return $('[data-test="proceed-1"]'); }
     get checkoutButton2() { return $('[data-test="proceed-2"]'); }
+    get checkoutButton3() { return $('[data-test="proceed-3"]'); }
     get emptyCartMessage() { return $('.empty-cart'); }
     get productInCart() { return $('[data-test="product-title"]'); }
     get quantityInCart() { return $('[data-test="product-quantity"]'); }
     get priceInCart() { return $('[data-test="product-price"]'); }
 
     async navigateToCart() {
-        await this.cartIcon.waitForDisplayed({ timeout: 10000 });
+        await this.cartIcon.waitForDisplayed();
         await this.cartIcon.click();
-        await browser.pause(2000);
     }
 
     async isProductInCart(productName) {
@@ -27,22 +28,20 @@ class CartPage extends BasePage {
         }
     }
 
-    async getCartItemCount() {
-        try {
-            const items = await this.cartItems;
-            return items.length;
-        } catch (error) {
-            return 0;
-        }
+    async getCartItemName() {
+        const name = await this.productInCart;
+        return name;
     }
 
+    async getCartItemQuantity() {
+        const quantityElement = await this.quantityInCart;
+        const quantity = await quantityElement.getValue();
+        return quantity;
+    }    
+
     async getCartTotal() {
-        try {
-            await this.cartTotal.waitForDisplayed({ timeout: 5000 });
-            return await this.cartTotal.getText();
-        } catch (error) {
-            return '0';
-        }
+        const total = await this.cartTotal;
+        return total;
     }
 
     async proceedToCheckout() {

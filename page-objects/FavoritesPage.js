@@ -1,10 +1,10 @@
 const BasePage = require('./BasePage');
 
 class FavoritesPage extends BasePage {
-    get favoritesLink() { return $('[data-test="nav-favorites"]'); }
-    get myAccountLink() { return $('[data-test="nav-user-menu"]'); }
+    get favoritesLink() { return $('[data-test="nav-my-favorites"]'); }
+    get myAccountLink() { return $('[data-test="nav-menu"]'); }
     get favoritesSection() { return $('[data-test="favorites"]'); }
-    get favoriteItems() { return $$('[data-test="favorite-item"]'); }
+    get favoriteItems() { return $$('[data-test="product-name"]'); }
     get emptyFavoritesMessage() { return $('.empty-favorites'); }
     get favoriteProductTitle() { return $('[data-test="product-title"]'); }
 
@@ -51,12 +51,8 @@ class FavoritesPage extends BasePage {
     }
 
     async getFavoriteItemCount() {
-        try {
-            const items = await this.favoriteItems;
-            return items.length;
-        } catch (error) {
-            return 0;
-        }
+        const items = await this.favoriteItems;
+        return items.length;
     }
 
     async isFavoritesEmpty() {

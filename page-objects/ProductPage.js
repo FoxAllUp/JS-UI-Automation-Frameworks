@@ -1,10 +1,10 @@
 const BasePage = require('./BasePage');
 
 class ProductPage extends BasePage {
-    get productImage() { return $('[data-test="product-image"]'); }
-    get productTitle() { return $('[data-test="product-title"]'); }
+    get productImage() { return $$('.row.my-3')[0].$('img'); }
+    get productName() { return $('[data-test="product-name"]'); }
     get productDescription() { return $('[data-test="product-description"]'); }
-    get productPrice() { return $('[data-test="product-price"]'); }
+    get productPrice() { return $('[data-test="unit-price"]'); }
     get quantityInput() { return $('[data-test="quantity"]'); }
     get addToCartButton() { return $('[data-test="add-to-cart"]'); }
     get addToFavoritesButton() { return $('[data-test="add-to-favorites"]'); }
@@ -23,45 +23,26 @@ class ProductPage extends BasePage {
     }
 
     async getProductInfo() {
-        const title = await this.productTitle.getText();
-        const price = await this.productPrice.getText();
-        const description = await this.productDescription.getText();
+        const image = await this.productImage;
+        const name = await this.productName;
+        const description = await this.productDescription;
+        const price = await this.productPrice;      
         
         return {
-            title,
-            price,
-            description
+            image,
+            name,
+            description,
+            price
         };
     }
 
     async setQuantity(quantity) {
-        await this.quantityInput.waitForDisplayed({ timeout: 10000 });
         await this.quantityInput.clearValue();
         await this.quantityInput.setValue(quantity);
     }
 
     async addToCart() {
-        await this.addToCartButton.waitForDisplayed({ timeout: 10000 });
         await this.addToCartButton.click();
-        await browser.pause(2000); // Wait for cart update
-    }
-
-    async addToFavorites() {
-        // Try both selectors as the site might use different ones
-        try {
-            if (await this.addToFavoritesButton.isDisplayed()) {
-                await this.addToFavoritesButton.click();
-            } else if (await this.heartIcon.isDisplayed()) {
-                await this.heartIcon.click();
-            }
-            await browser.pause(2000);
-        } catch (error) {
-            console.log('Favorites button not found, trying alternative selector');
-            const heartButton = $('button[title*="favorite"], button[title*="heart"], .fa-heart');
-            if (await heartButton.isDisplayed()) {
-                await heartButton.click();
-            }
-        }
     }
 
     async areAllDetailsVisible() {

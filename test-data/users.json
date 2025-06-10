@@ -3,14 +3,14 @@
       "firstName": "John",
       "lastName": "Doe",
       "email": "john.doe.test@example.com",
-      "password": "TestPassword123!",
+      "password": "MyTestPassword123!][{›",
       "dob": "1990-01-01",
       "street": "123 Test Street",
       "postcode": "12345",
       "city": "Test City",
       "state": "Test State",
-      "country": "United States",
-      "phone": "+1234567890"
+      "country": "United States of America (the)",
+      "phone": "1234567890"
     },
     "existingUser": {
       "email": "customer@practicesoftwaretesting.com",
@@ -23,6 +23,6 @@
       "city": "Billing City",
       "state": "Billing State",
       "postcode": "54321",
-      "country": "United States"
+      "country": "United States of America"
     }
   }

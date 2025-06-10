@@ -3,9 +3,16 @@ Feature: Add Product to Favorites
   I want to add products to my favorites list
   So that I can easily find them later
 
-  Scenario: User adds a product to their favorites list
-    Given I am logged into my account
-    When I navigate to a product details page
-    And I click on the "Add to favorites" or heart icon
-    And I navigate to my favorites section
-    Then I should see the product saved in my favorites list
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User adds a product to favorites
+    Given I am on the Practice Software Testing homepage
+    And I am logged in
+    When I go back to homepage
+    And I click on a product card
+    Then I should be redirected to the Product Details page
+    When I click the "Add to favourites" button
+    And I click on my account name
+    And I click "My favorites"
+    Then I should see the product listed in my favorites

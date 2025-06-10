@@ -3,9 +3,12 @@ Feature: Search for Specific Product
   I want to search for products
   So that I can quickly find what I'm looking for
 
-  Scenario: User searches for a particular product using search functionality
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User searches for a specific product
     Given I am on the Practice Software Testing homepage
-    When I enter "pliers" in the search box
-    And I click the search button or press Enter
-    And I review the search results
-    Then I should see relevant products containing "pliers" in the results
+    When I click on "Search" input field
+    And I enter a search term such as "pliers" in the search field
+    And I click on "Search" button
+    Then I should see a list of products matching the search term

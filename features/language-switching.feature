@@ -3,9 +3,12 @@ Feature: Change Website Language
   I want to change the website language
   So that I can use the site in my preferred language
 
-  Scenario: User changes the website display language
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User changes the website language
     Given I am on the Practice Software Testing homepage
-    When I locate the language selector in the header or footer
-    And I click on the language dropdown
-    And I select a different language option
-    Then I should see the website content displayed in the selected language
+    When I click the language selector
+    Then I see the language options
+    When I choose a different language
+    Then the website content should be displayed in the selected language

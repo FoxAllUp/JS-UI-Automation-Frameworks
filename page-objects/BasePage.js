@@ -1,11 +1,10 @@
 class BasePage {
     constructor() {
-        this.baseUrl = 'https://practicesoftwaretesting.com';
+        this.baseUrl = 'https://practicesoftwaretesting.com/';
     }
 
-    async open(path = '') {
-        await browser.url(this.baseUrl + path);
-        await browser.maximizeWindow();
+    async open() {
+        await browser.url(this.baseUrl);
     }
 
     async waitForElement(selector, timeout = 10000) {
@@ -29,6 +28,10 @@ class BasePage {
         const element = await this.waitForElement(selector);
         return await element.getText();
     }
+
+    async getTitle() {
+        return await browser.getTitle();
+    }    
 
     async isElementDisplayed(selector) {
         try {

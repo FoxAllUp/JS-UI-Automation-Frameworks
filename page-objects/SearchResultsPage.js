@@ -5,7 +5,7 @@ class SearchResultsPage extends BasePage {
     get noResultsMessage() { return $('[data-test="no-results"]'); }
     get searchQuery() { return $('[data-test="search-query"]'); }
     get resultCount() { return $('[data-test="search-result-count"]'); }
-    get productTitles() { return $$('[data-test="product-title"]'); }
+    get productName() { return $('[data-test="product-name"]'); }
     get firstSearchResult() { return $('[data-test="product"]:first-child'); }
 
     async getSearchResults() {
@@ -32,27 +32,26 @@ class SearchResultsPage extends BasePage {
         return resultCount > 0;
     }
 
-    async areResultsRelevant(searchTerm) {
-        try {
-            const productTitles = await this.productTitles;
-            if (productTitles.length === 0) return false;
-
-            // Check if at least one product title contains the search term
-            for (let title of productTitles) {
-                const titleText = await title.getText();
-                if (titleText.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return true;
-                }
+    async getIfResultsAreRelevant(searchTerm) {
+        const titles = await this.productNames;
+    
+        if (!titles.length) return false;
+    
+        for (const title of titles) {
+            const text = await title.getText();
+            if (!text.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return false;
             }
-            return false;
-        } catch (error) {
-            return false;
         }
+    
+        return true;
     }
+    
+    
 
     async getFirstResultTitle() {
         try {
-            const firstTitle = await this.productTitles[0];
+            const firstTitle = await this.productNames[0];
             return await firstTitle.getText();
         } catch (error) {
             return '';

@@ -3,9 +3,16 @@ Feature: Add Product to Shopping Cart
   I want to add products to my shopping cart
   So that I can purchase multiple items at once
 
-  Scenario: User adds a product to their shopping basket
-    Given I am viewing a product details page
-    When I select the desired quantity
-    And I click the "Add to cart" button
-    And I navigate to the shopping cart
-    Then I should see the selected product in my cart with correct quantity and price
+  Background: 
+    Given I open the Practice Software Testing homepage
+
+  Scenario: User adds a product to the shopping cart
+    Given I am on the Practice Software Testing homepage
+    When I click on a product card
+    Then I should be redirected to the Product Details page
+    When I select a quantity
+    And I click "Add to cart" button
+    And I click on shopping cart icon
+    Then I should see in the cart the correct product name
+    And I should see in the cart the correct product quantity
+    And I should see in the cart the correct product's price

@@ -1,27 +1,30 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('chai');
 const HomePage = require('../../page-objects/HomePage');
 const TestDataManager = require('../../test-data/testData');
 
-When(/^I locate the language selector in the header or footer$/, async () => {
-    // Language selector should be visible on the page
-    await browser.pause(1000);
+
+When(/^I click the language selector$/, async () => {
+    await HomePage.languageSelector.isDisplayed();
+    await HomePage.languageSelector.click();
 });
 
-When(/^I click on the language dropdown$/, async () => {
-    // This step is combined with the next one for simplicity
-    await browser.pause(500);
+Then(/^I see the language options$/, async () => {
+    const expectedLangs = ['es', 'fr', 'de'];
+        for (const lang of expectedLangs) {
+        const option = await $(`[data-test="lang-${lang}"]`);
+        const IsOptionDisplayed = await option.isDisplayed();
+        expect(IsOptionDisplayed).to.be.true;
+    }
 });
 
-When(/^I select a different language option$/, async () => {
+When(/^I choose a different language$/, async () => {
     const language = TestDataManager.getLanguage('spanish');
-    await HomePage.changeLanguage(language);
+    await HomePage.selectLanguage(language);
 });
 
-Then(/^I should see the website content displayed in the selected language$/, async () => {
-    await browser.pause(3000);
-    const currentUrl = await browser.getUrl();
-    // Check if URL or page content reflects language change
-    // This is a basic check - in real scenarios you'd check specific text elements
-    console.log('Language change completed, URL:', currentUrl);
-    expect(currentUrl).toBeTruthy();
+Then(/^the website content should be displayed in the selected language$/, async () => {
+    const homeLinkText = await HomePage.getHomeLink();
+    const homeText = TestDataManager.getHomeText('es');
+    expect(homeLinkText).to.equal(homeText); 
 });

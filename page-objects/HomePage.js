@@ -4,17 +4,16 @@ class HomePage extends BasePage {
     get signInLink() { return $('[data-test="nav-sign-in"]'); }
     get searchBox() { return $('[data-test="search-query"]'); }
     get searchButton() { return $('[data-test="search-submit"]'); }
-    get languageSelector() { return $('.language-selector'); }
+    get languageSelector() { return $('[data-test="language-select"]'); }
     get productCards() { return $$('[data-test^="product-01"]')[0]; }
     get firstProduct() { return $$('[data-test^="product-01"]')[0]; }
+    get homeLink() { return $('[data-test="nav-home"]'); }
 
     async openHomePage() {
         await this.open();
-        await browser.pause(2000); // Wait for page to load
     }
 
     async clickSignIn() {
-        await this.signInLink.waitForDisplayed({ timeout: 10000 });
         await this.signInLink.click();
     }
 
@@ -25,16 +24,22 @@ class HomePage extends BasePage {
     }
 
     async clickFirstProduct() {
-        await this.firstProduct.waitForDisplayed({ timeout: 20000 });
         await this.firstProduct.click();
     }
 
-    async changeLanguage(language) {
-        if (await this.languageSelector.isDisplayed()) {
-            await this.languageSelector.click();
-            const languageOption = $(`[value="${language}"]`);
-            await languageOption.click();
-        }
+    async getHomeLink() {
+        const homeLink = await this.homeLink.getText();
+        return homeLink;
+    }
+
+    async getSearchBox() {
+        const searchBox = await this.searchBox;
+        return searchBox;
+    }
+
+    async selectLanguage(language) {
+        const languageOption = $(`[data-test="lang-${language}"]`);
+        await languageOption.click();
     }
 }
 
