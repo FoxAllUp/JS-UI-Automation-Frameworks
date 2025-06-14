@@ -20,7 +20,7 @@ This automation framework tests 8 key scenarios (created in module 2):
 - npm (v6 or higher)
 - Chrome browser
 - Firefox browser
-- Safari browser (for macOS)
+- Microsoft Edge browser
 
 ## 🔧 Key Dependencies
 
@@ -28,6 +28,7 @@ This automation framework tests 8 key scenarios (created in module 2):
 - **Cucumber**: v9.x - BDD framework for Gherkin scenarios
 - **Chromedriver**: Latest - Chrome browser automation
 - **Geckodriver**: Latest - Firefox browser automation
+- **Edgedriver**: Latest - Microsoft Edge browser automation
 
 ## 🛠️ Installation
 
@@ -52,7 +53,6 @@ practice-software-testing-automation/
 ├── page-objects/               # Page Object Model classes
 ├── config/                     # WDIO configuration files
 ├── test-data/                  # Test data files
-├── utilities/                  # Helper functions
 └── package.json               # Project dependencies
 ```
 
@@ -62,9 +62,6 @@ practice-software-testing-automation/
 ```bash
 # Run all tests
 npm test
-
-# Run all tests (alternative)
-npm run test:all
 ```
 
 ### Browser-Specific Tests
@@ -103,15 +100,15 @@ npm run test:dev
 - **Headless Mode**: All tests run in headless mode by default
 - **Parallel Execution**: Tests run with 2 parallel instances
 - **Retry Logic**: Tests retry 2 times before marking as failed
-- **Multiple Browsers**: Support for Chrome, Firefox, and Safari
+- **Multiple Browsers**: Support for Chrome, Firefox and Microsoft Edge
 - **BDD Framework**: Uses Cucumber for readable test scenarios
 
 ## 📊 Test Reports
 
 WDIO generates built-in reports after test execution:
-- Console output with test results summary
-- Cucumber JSON reports (if configured)
-- Built-in spec reporter shows real-time test progress
+- Console output with test results summary 
+- **Allure** - Interactive HTML reports with screenshots, step details, and trend analysis
+- Built-in **spec reporter** shows real-time test progress
 
 ## 🧪 Test Data
 
