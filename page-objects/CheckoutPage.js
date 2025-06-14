@@ -35,7 +35,6 @@ class CheckoutPage extends BasePage {
     async proceedToPayment() {
         await this.nextButton.waitForDisplayed({ timeout: 10000 });
         await this.nextButton.click();
-        await browser.pause(2000);
     }
 
     async selectPaymentMethod(method = 'cash') {
@@ -56,13 +55,11 @@ class CheckoutPage extends BasePage {
             default:
                 await this.creditCardOption.click();
         }
-        await browser.pause(1000);
     }
 
     async proceedToConfirmation() {
         await this.paymentNextButton.waitForDisplayed({ timeout: 10000 });
         await this.paymentNextButton.click();
-        await browser.pause(2000);
     }
 
     async confirmOrder() {

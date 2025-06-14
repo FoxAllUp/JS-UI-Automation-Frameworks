@@ -9,19 +9,14 @@ config.capabilities = [{
             '--headless',
             '--window-size=1920,1080',
             '--start-maximized',
-            '--disable-web-security',
-            '--disable-features=VizDisplayCompositor',
-            '--disable-background-timer-throttling',
-            '--disable-backgrounding-occluded-windows',
-            '--disable-renderer-backgrounding',
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu', // Add this for stability
-            '--disable-extensions',
-            '--disable-plugins'
+            '--disable-gpu',
+            '--guest'
         ]
     } 
 }];
+config.specs = [
+    "../features/*.feature",
+  ]
 
 config.services = ['chromedriver'];
 

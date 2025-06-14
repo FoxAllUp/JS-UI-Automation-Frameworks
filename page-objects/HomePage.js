@@ -1,7 +1,7 @@
 const BasePage = require('./BasePage');
 
 class HomePage extends BasePage {
-    get signInLink() { return $('[data-test="nav-sign-in"]'); }
+    get signInLink() { return $('a[data-test="nav-sign-in"]'); }
     get searchBox() { return $('[data-test="search-query"]'); }
     get searchButton() { return $('[data-test="search-submit"]'); }
     get languageSelector() { return $('[data-test="language-select"]'); }

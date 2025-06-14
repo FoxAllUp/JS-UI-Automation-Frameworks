@@ -9,6 +9,9 @@ Given(/^I open the Practice Software Testing homepage$/, async () => {
 });
 
 Given(/^I am on the Practice Software Testing homepage$/, async () => {
+    await browser.waitUntil(async () => {
+        return (await browser.getTitle()).startsWith("Practice Software Testing");
+    }, {timeout : 5000});
     const title = await browser.getTitle();
     expect(title).to.match(/^Practice Software Testing/);
 });

@@ -55,19 +55,11 @@ exports.config = {
       browserName: "chrome",
       "goog:chromeOptions": {
         args: [
-          "--headless",
-          "--window-size=1920,1080",
-          "--start-maximized",
-          "--disable-web-security",
-          "--disable-features=VizDisplayCompositor",
-          "--disable-background-timer-throttling",
-          "--disable-backgrounding-occluded-windows",
-          "--disable-renderer-backgrounding",
-          "--no-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-gpu",
-          "--disable-extensions",
-          "--disable-plugins"
+          '--headless',
+          '--window-size=1920,1080',
+          '--start-maximized',
+          '--disable-gpu',
+          '--guest'
         ],
       },
     },

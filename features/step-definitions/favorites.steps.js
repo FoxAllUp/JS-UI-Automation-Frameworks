@@ -17,6 +17,7 @@ When(/^I click "My favorites"$/, async () => {
 });
 
 Then(/^I should see the product listed in my favorites$/, async () => {
+    await $('[data-test="product-name"]').waitForExist({ timeout: 5000 });
     const numberOfFavoriteItems = await FavoritesPage.getFavoriteItemCount();
     expect(numberOfFavoriteItems).to.be.greaterThan(0);
 });

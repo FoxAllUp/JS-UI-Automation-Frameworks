@@ -17,7 +17,6 @@ class FavoritesPage extends BasePage {
                 // Try through user menu
                 await this.myAccountLink.waitForDisplayed({ timeout: 10000 });
                 await this.myAccountLink.click();
-                await browser.pause(1000);
                 
                 const favoritesMenuItem = $('a[href*="favorites"], a[href*="wishlist"]');
                 if (await favoritesMenuItem.isDisplayed()) {
@@ -27,7 +26,6 @@ class FavoritesPage extends BasePage {
                     await this.open('/account/favorites');
                 }
             }
-            await browser.pause(2000);
         } catch (error) {
             console.log('Direct navigation to favorites failed, trying URL approach');
             await this.open('/account/favorites');

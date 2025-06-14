@@ -1,7 +1,7 @@
 const BasePage = require('./BasePage');
 
 class CartPage extends BasePage {
-    get cartIcon() { return $('[data-icon="cart-shopping"]'); }
+    get cartIcon() { return $('[data-test="nav-cart"]'); }
     get cartItems() { return $$('[data-test="cart-item"]'); }
     get cartTotal() { return $('[data-test="cart-total"]'); }
     get anyCheckoutButton() { return $('[data-test^="proceed-"]'); }
@@ -14,7 +14,7 @@ class CartPage extends BasePage {
     get priceInCart() { return $('[data-test="product-price"]'); }
 
     async navigateToCart() {
-        await this.cartIcon.waitForDisplayed();
+        await this.cartIcon.waitForClickable({timeout: 5000});
         await this.cartIcon.click();
     }
 

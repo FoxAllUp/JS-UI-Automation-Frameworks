@@ -26,6 +26,7 @@ When(/^I click on shopping cart icon$/, async () => {
 });
 
 Then(/^I should see in the cart the correct product name$/, async () => {
+    await $('[data-test="product-title"]').waitForExist({ timeout: 5000 });
     const productName = await CartPage.getCartItemName();
     const isVisible = await productName.isDisplayed();
     expect(isVisible).to.be.true;

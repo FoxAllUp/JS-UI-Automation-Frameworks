@@ -4,10 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run wdio.conf.js",
-    "test:chrome": "wdio run config/wdio.chrome.conf.js --spec ./features/*.feature",
-    "test:firefox": "wdio run config/wdio.firefox.conf.js --spec ./features/*.feature",
-    "test:safari": "wdio run config/wdio.safari.conf.js --spec ./features/*.feature",
-    "test:edge": "wdio run config/wdio.edge.conf.js --spec ./features/*.feature",
+    "test:chrome": "wdio run config/wdio.chrome.conf.js",
+    "test:firefox": "wdio run config/wdio.firefox.conf.js",
+    "test:safari": "wdio run config/wdio.safari.conf.js",
+    "test:edge": "wdio run config/wdio.edge.conf.js",
     "test:parallel": "wdio run wdio.conf.js --maxInstances=2",
     "test:all-browsers": "npm run test:chrome && npm run test:firefox && npm run test:safari",
     "generate-report": "allure generate allure-results --clean && allure open"

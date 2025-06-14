@@ -18,5 +18,7 @@ When(/^I click on "Search" button$/, async () => {
 
 Then(/^I should see a list of products matching the search term$/, async () => {
     const nameOfProduct = await SearchResultsPage.productName.getText();
+    const paginationExists = await $('[class="pagination"]').isExisting();
+    expect(paginationExists).to.be.false;
     expect(nameOfProduct).contain('Pliers');
 });

@@ -31,13 +31,14 @@ class LoginPage extends BasePage {
         await this.firstNameInput.setValue(userData.firstName);
         await this.lastNameInput.setValue(userData.lastName);
 
-//        await this.dobInput.setValue(userData.dob);
-
-        await this.dobInput.click();
-        await this.dobInput.setValue('1990');
-        await browser.keys('Tab');
-        await browser.keys(['0', '1', '0', '1']);
-
+        const browserName = await browser.capabilities.browserName.toLowerCase();
+        if (browserName === 'firefox'){
+            await this.dobInput.setValue(userData.dob);
+        } else {
+            await this.dobInput.click();
+            await this.dobInput.clearValue();
+            await browser.keys(['1','9','9','0','ArrowRight','0','1','0','1']);
+        };
 
         await this.streetInput.setValue(userData.street);
         await this.postcodeInput.setValue(userData.postcode);
@@ -47,7 +48,7 @@ class LoginPage extends BasePage {
         await this.phoneInput.setValue(userData.phone);
         await this.emailInput.setValue(userData.email);
         await this.passwordInput.setValue(userData.password);
-    }
+    };
 
     async submitRegistration() {
         await this.registerButton.click();

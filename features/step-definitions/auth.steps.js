@@ -10,8 +10,8 @@ Given(/^I am on the Practice Software Testing login page$/, async () => {
 });
 
 Given(/^I am logged in$/, async () => {
-    await HomePage.openHomePage();
-    await HomePage.clickSignIn();
+    const signInLink = await HomePage.signInLink;
+    await signInLink.click();
     const userData = TestDataManager.getExistingUser();
     await LoginPage.login(userData.email, userData.password);
 });
