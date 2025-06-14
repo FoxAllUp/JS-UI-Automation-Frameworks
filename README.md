@@ -34,7 +34,7 @@ This automation framework tests 8 key scenarios (created in module 2):
 
 1. Clone the repository:
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/FoxAllUp/JS-UI-Automation-Frameworks.git
 cd js-ui-automation-frameworks
 ```
 
