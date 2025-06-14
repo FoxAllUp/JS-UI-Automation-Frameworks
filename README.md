@@ -72,8 +72,8 @@ npm run test:chrome
 # Firefox (headless)  
 npm run test:firefox
 
-# Safari (headless)
-npm run test:safari
+# Microsoft Edge (headless)
+npm run test:edge
 ```
 
 ### Parallel Execution
@@ -94,7 +94,7 @@ npm run test:dev
 - `wdio.conf.ts` - Main WDIO configuration
 - `config/wdio.chrome.conf.js` - Chrome-specific settings
 - `config/wdio.firefox.conf.js` - Firefox-specific settings  
-- `config/wdio.safari.conf.js` - Safari-specific settings
+- `config/wdio.edge.conf.js` - Edge-specific settings
 
 ### Key Features
 - **Headless Mode**: All tests run in headless mode by default
