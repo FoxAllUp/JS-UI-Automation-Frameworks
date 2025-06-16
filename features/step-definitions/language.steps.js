@@ -21,10 +21,27 @@ Then(/^I see the language options$/, async () => {
 When(/^I choose a different language$/, async () => {
     const language = TestDataManager.getLanguage('spanish');
     await HomePage.selectLanguage(language);
+    
+    const expectedHomeText = TestDataManager.getHomeText('es');
+    await browser.waitUntil(async () => {
+        const currentHomeText = await HomePage.getHomeLink();
+        return currentHomeText === expectedHomeText;
+    }, {
+        timeout: 10000,
+        timeoutMsg: 'Language change was not completed within the expected time'
+    });
 });
 
 Then(/^the website content should be displayed in the selected language$/, async () => {
-    const homeLinkText = await HomePage.getHomeLink();
     const homeText = TestDataManager.getHomeText('es');
+    await browser.waitUntil(async () => {
+        const homeLinkText = await HomePage.getHomeLink();
+        return homeLinkText === homeText;
+    }, {
+        timeout: 5000,
+        timeoutMsg: 'Home link text did not update to the expected language'
+    });
+    
+    const homeLinkText = await HomePage.getHomeLink();
     expect(homeLinkText).to.equal(homeText); 
 });

@@ -1,5 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
+const should = require('chai').should();
 const HomePage = require('../../page-objects/HomePage');
 const LoginPage = require('../../page-objects/LoginPage');
 const TestDataManager = require('../../test-data/testData');
@@ -57,8 +58,8 @@ Then(/^I should be redirected to the Login page$/, async () => {
     const currentTitle = await browser.getTitle();
     const currentUrl = await browser.getUrl();
 
-    expect(currentTitle).contain('Login');
-    expect(currentUrl).contain('login');
+    currentTitle.should.contain('Login');
+    currentUrl.should.contain('login');
 });
 
 Then(/^I should be redirected to "My Account" page$/, async () => {
@@ -70,6 +71,6 @@ Then(/^I should be redirected to "My Account" page$/, async () => {
     const currentUrl = await browser.getUrl();
     const currentTitle = await browser.getTitle();
 
-    expect(currentTitle).contain('Overview');
-    expect(currentUrl).contain('account');
+    currentTitle.should.contain('Overview');
+    currentUrl.should.contain('account');
 });
