@@ -1,4 +1,4 @@
-# Automated Testing in JS course Module 4 TASK: JS UI Automation frameworks
+# Automated Testing in JS course PROJECT
 
 This project contains automated tests for the Practice Software Testing website using WebDriverIO (WDIO) with Cucumber BDD framework.
 
