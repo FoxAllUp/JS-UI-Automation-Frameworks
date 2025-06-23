@@ -5,7 +5,7 @@ config.capabilities = [{
     browserName: 'firefox',
     'moz:firefoxOptions': {
         args: [
-//            '--headless',
+            '--headless',
             '--width=1920',
             '--height=1080'
         ]

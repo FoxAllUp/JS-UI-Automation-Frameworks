@@ -1,10 +1,10 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const HomePage = require('../../page-objects/HomePage');
 const SearchResultsPage = require('../../page-objects/SearchResultsPage');
-const TestDataManager = require('../../test-data/testData');
 
 When(/^I click on "Search" input field$/, async () => {
+    await HomePage.searchBox.waitForDisplayed();
     await HomePage.searchBox.click();
 });
 
@@ -17,8 +17,8 @@ When(/^I click on "Search" button$/, async () => {
 });
 
 Then(/^I should see a list of products matching the search term$/, async () => {
-    const nameOfProduct = await SearchResultsPage.productName.getText();
-    const paginationExists = await $('[class="pagination"]').isExisting();
+    const namesOfProducts = await SearchResultsPage.getProductNames();
+    const paginationExists = await SearchResultsPage.pagination.isExisting();
     expect(paginationExists).to.be.false;
-    expect(nameOfProduct).contain('Pliers');
+    expect(namesOfProducts.every(name => name.includes('Pliers'))).to.be.true;
 });

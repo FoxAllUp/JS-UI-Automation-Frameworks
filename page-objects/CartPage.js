@@ -1,31 +1,20 @@
 const BasePage = require('./BasePage');
+const TestDataManager = require('../test-data/testData');
+
+const assert = require('chai').assert;
 
 class CartPage extends BasePage {
     get cartIcon() { return $('[data-test="nav-cart"]'); }
-    get cartItems() { return $$('[data-test="cart-item"]'); }
     get cartTotal() { return $('[data-test="cart-total"]'); }
-    get anyCheckoutButton() { return $('[data-test^="proceed-"]'); }
     get checkoutButton() { return $('[data-test="proceed-1"]'); }
     get checkoutButton2() { return $('[data-test="proceed-2"]'); }
     get checkoutButton3() { return $('[data-test="proceed-3"]'); }
-    get emptyCartMessage() { return $('.empty-cart'); }
     get productInCart() { return $('[data-test="product-title"]'); }
     get quantityInCart() { return $('[data-test="product-quantity"]'); }
-    get priceInCart() { return $('[data-test="product-price"]'); }
 
     async navigateToCart() {
         await this.cartIcon.waitForClickable({timeout: 5000});
         await this.cartIcon.click();
-    }
-
-    async isProductInCart(productName) {
-        try {
-            await this.productInCart.waitForDisplayed({ timeout: 5000 });
-            const cartProduct = await this.productInCart.getText();
-            return cartProduct.includes(productName) || productName.includes(cartProduct);
-        } catch (error) {
-            return false;
-        }
     }
 
     async getCartItemName() {
@@ -44,24 +33,32 @@ class CartPage extends BasePage {
         return total;
     }
 
-    async proceedToCheckout() {
-        await this.checkoutButton.waitForDisplayed({ timeout: 10000 });
-        await this.checkoutButton.click();
-    }
-
-    async proceedToCheckout2() {
-        await this.checkoutButton2.waitForDisplayed({ timeout: 10000 });
-        await this.checkoutButton2.click();
-    }
-
-    async isCartEmpty() {
-        try {
-            await this.emptyCartMessage.waitForDisplayed({ timeout: 5000 });
-            return true;
-        } catch (error) {
-            return false;
+    async verifyCartItem(property) {
+        switch (property) {
+          case 'name': {
+            await this.productInCart.waitForExist({ timeout: 5000 });
+            const productName = await this.getCartItemName();
+            const isVisible = await productName.isDisplayed();
+            assert.isTrue(isVisible);
+            break;
+          }
+          case 'quantity': {
+            const quantity = TestDataManager.getQuantity('multiple');
+            const actualQuantity = await this.getCartItemQuantity();
+            assert.equal(actualQuantity, quantity);
+            break;
+          }
+          case 'price': {
+            const total = await this.getCartTotal();
+            const isVisible = await total.isDisplayed();
+            assert.isTrue(isVisible);
+            break;
+          }
+          default:
+            throw new Error(`Unknown property: ${property}`);
         }
-    }
+      }
+      
 }
 
 module.exports = new CartPage();

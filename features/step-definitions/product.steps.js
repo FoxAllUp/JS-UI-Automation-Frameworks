@@ -1,55 +1,29 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const HomePage = require('../../page-objects/HomePage');
 const ProductPage = require('../../page-objects/ProductPage');
 
-Given(/^I am viewing a product details page$/, async () => {
-    await HomePage.openHomePage();
-    await HomePage.clickFirstProduct();
-});
-
 When(/^I click on a product card$/, async () => {
-    await browser.saveScreenshot('./screenshots/before-click-product.png');
-    await HomePage.clickFirstProduct();
-});
-
-
-When(/^I navigate to a product details page$/, async () => {
-    await HomePage.openHomePage();
     await HomePage.clickFirstProduct();
 });
 
 Then(/^I should be redirected to the Product Details page$/, async () => {
-    await browser.waitUntil(async () => {
-        const url = await browser.getUrl();
-        return url.includes('product');
-    });
-
-    const currentUrl = await browser.getUrl();
-
-    expect(currentUrl).contain('product');
+    const url = await browser.waitUntil(
+        async () => {
+          const current = await browser.getUrl();
+          return current.includes('product') ? current : false;
+        },
+        {
+          timeout: 5000,
+          timeoutMsg: 'Expected to be redirected to a product page',
+        }
+      );
+      
+      expect(url).to.include('product');      
 });
 
-Then(/^I should see the product's image$/, async () => {
+Then(/^I should see the product's (image|name|description|price)$/, async (element) => {
     const productInfo = await ProductPage.getProductInfo();
-    const isVisible = await productInfo.image.isDisplayed();
-    expect(isVisible).to.be.true;
-});
-
-Then(/^I should see the product's name$/, async () => {
-    const productInfo = await ProductPage.getProductInfo();
-    const isVisible = await productInfo.name.isDisplayed();
-    expect(isVisible).to.be.true;
-});
-
-Then(/^I should see the product's description$/, async () => {
-    const productInfo = await ProductPage.getProductInfo();
-    const isVisible = await productInfo.description.isDisplayed();
-    expect(isVisible).to.be.true;
-});
-
-Then(/^I should see the product's price$/, async () => {
-    const productInfo = await ProductPage.getProductInfo();
-    const isVisible = await productInfo.price.isDisplayed();
+    const isVisible = await productInfo[element].isDisplayed();
     expect(isVisible).to.be.true;
 });

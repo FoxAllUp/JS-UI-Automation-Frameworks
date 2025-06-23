@@ -13,6 +13,6 @@ Feature: Add Product to Favorites
     And I click on a product card
     Then I should be redirected to the Product Details page
     When I click the "Add to favourites" button
-    And I click on my account name
+    And I click "my account name"
     And I click "My favorites"
     Then I should see the product listed in my favorites

@@ -1,14 +1,8 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-const { expect } = require('chai');
 const should = require('chai').should();
 const HomePage = require('../../page-objects/HomePage');
 const LoginPage = require('../../page-objects/LoginPage');
 const TestDataManager = require('../../test-data/testData');
-
-Given(/^I am on the Practice Software Testing login page$/, async () => {
-    await HomePage.openHomePage();
-    await expect(browser).toHaveTitleContaining('Practice Software Testing');
-});
 
 Given(/^I am logged in$/, async () => {
     const signInLink = await HomePage.signInLink;
@@ -50,27 +44,9 @@ When(/^I click the "Login" button$/, async () => {
 }); 
 
 Then(/^I should be redirected to the Login page$/, async () => {
-    await browser.waitUntil(async () => {
-        const title = await browser.getTitle();
-        return title.includes('Login');
-    });
-
-    const currentTitle = await browser.getTitle();
-    const currentUrl = await browser.getUrl();
-
-    currentTitle.should.contain('Login');
-    currentUrl.should.contain('login');
+    await HomePage.expectRedirection('Login', 'login');
 });
 
 Then(/^I should be redirected to "My Account" page$/, async () => {
-    await browser.waitUntil(async () => {
-        const title = await browser.getTitle();
-        return title.includes('Overview');
-    });
-
-    const currentUrl = await browser.getUrl();
-    const currentTitle = await browser.getTitle();
-
-    currentTitle.should.contain('Overview');
-    currentUrl.should.contain('account');
+    await HomePage.expectRedirection('Overview', 'account');
 });

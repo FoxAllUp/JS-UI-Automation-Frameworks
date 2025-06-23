@@ -8,19 +8,6 @@ class ProductPage extends BasePage {
     get quantityInput() { return $('[data-test="quantity"]'); }
     get addToCartButton() { return $('[data-test="add-to-cart"]'); }
     get addToFavoritesButton() { return $('[data-test="add-to-favorites"]'); }
-    get heartIcon() { return $('.fa-heart'); }
-    get specifications() { return $('[data-test="product-specifications"]'); }
-    get reviews() { return $('[data-test="product-reviews"]'); }
-
-    async isProductDetailsPageDisplayed() {
-        try {
-            await this.productTitle.waitForDisplayed({ timeout: 10000 });
-            await this.productPrice.waitForDisplayed({ timeout: 5000 });
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
 
     async getProductInfo() {
         const image = await this.productImage;
@@ -43,15 +30,6 @@ class ProductPage extends BasePage {
 
     async addToCart() {
         await this.addToCartButton.click();
-    }
-
-    async areAllDetailsVisible() {
-        const imageVisible = await this.productImage.isDisplayed();
-        const titleVisible = await this.productTitle.isDisplayed();
-        const priceVisible = await this.productPrice.isDisplayed();
-        const descriptionVisible = await this.productDescription.isDisplayed();
-        
-        return imageVisible && titleVisible && priceVisible && descriptionVisible;
     }
 }
 

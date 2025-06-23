@@ -1,11 +1,11 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const HomePage = require('../../page-objects/HomePage');
 const TestDataManager = require('../../test-data/testData');
 
 
 When(/^I click the language selector$/, async () => {
-    await HomePage.languageSelector.isDisplayed();
+    await HomePage.languageSelector.waitForDisplayed();
     await HomePage.languageSelector.click();
 });
 

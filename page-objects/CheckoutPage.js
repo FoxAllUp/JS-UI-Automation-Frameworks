@@ -1,7 +1,9 @@
 const BasePage = require('./BasePage');
 
+const { expect } = require('chai');
+
+
 class CheckoutPage extends BasePage {
-    get billingAddressForm() { return $('[data-test="billing-address"]'); }
     get firstNameInput() { return $('[data-test="first-name"]'); }
     get lastNameInput() { return $('[data-test="last-name"]'); }
     get addressInput() { return $('[data-test="street"]'); }
@@ -9,10 +11,7 @@ class CheckoutPage extends BasePage {
     get stateInput() { return $('[data-test="state"]'); }
     get postcodeInput() { return $('[data-test="postal_code"]'); }
     get countrySelect() { return $('[data-test="country"]'); }
-    
-    get nextButton() { return $('[data-test="proceed-2"]'); }
-    get paymentNextButton() { return $('[data-test="proceed-3"]'); }
-    
+        
     get creditCardOption() { return $('[data-test="payment-method-1"]'); }
     get bankTransferOption() { return $('[data-test="payment-method-2"]'); }
     get giftCardOption() { return $('[data-test="payment-method-3"]'); }
@@ -20,7 +19,6 @@ class CheckoutPage extends BasePage {
     
     get confirmOrderButton() { return $('[data-test="finish"]'); }
     get orderConfirmation() { return $('[id=order-confirmation]'); }
-    get orderNumber() { return $('[data-test="order-number"]'); }
 
     get successMessage() { return $('[data-test="payment-success-message"]'); }
 
@@ -30,11 +28,6 @@ class CheckoutPage extends BasePage {
         await this.stateInput.setValue(billingData.state);
         await this.countrySelect.setValue(billingData.country);
         await this.postcodeInput.setValue(billingData.postcode);
-    }
-
-    async proceedToPayment() {
-        await this.nextButton.waitForDisplayed({ timeout: 10000 });
-        await this.nextButton.click();
     }
 
     async selectPaymentMethod(method = 'cash') {
@@ -57,34 +50,30 @@ class CheckoutPage extends BasePage {
         }
     }
 
-    async proceedToConfirmation() {
-        await this.paymentNextButton.waitForDisplayed({ timeout: 10000 });
-        await this.paymentNextButton.click();
-    }
-
     async confirmOrder() {
         await this.confirmOrderButton.waitForDisplayed({ timeout: 10000 });
         await this.confirmOrderButton.click();
-        await browser.pause(3000);
     }
 
-    async isOrderConfirmationDisplayed() {
-        try {
-            await this.orderConfirmation.waitForDisplayed({ timeout: 10000 });
-            return true;
-        } catch (error) {
-            return false;
+    async expectCheckoutMessageVisible(messageType) {
+        let element;
+    
+        switch (messageType) {
+            case 'a "Payment was successful"':
+                element = await this.successMessage;
+                break;
+            case 'an order confirmation':
+                element = await this.orderConfirmation;
+                break;
+            default:
+                throw new Error(`Unknown message type: "${messageType}"`);
         }
+    
+        await element.waitForDisplayed();
+        const isVisible = await element.isDisplayed();
+        expect(isVisible, `"${messageType}" message should be visible`).to.be.true;
     }
-
-    async getOrderNumber() {
-        try {
-            await this.orderNumber.waitForDisplayed({ timeout: 5000 });
-            return await this.orderNumber.getText();
-        } catch (error) {
-            return null;
-        }
-    }
+    
 }
 
 module.exports = new CheckoutPage();

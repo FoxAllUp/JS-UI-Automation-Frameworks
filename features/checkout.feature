@@ -19,4 +19,4 @@ Feature: Complete Checkout Process
     And I click on "Confirm" button
     Then I should see a "Payment was successful" message
     When I click on "Confirm" button
-    Then I should see an order confirmation message with order number
+    Then I should see an order confirmation message

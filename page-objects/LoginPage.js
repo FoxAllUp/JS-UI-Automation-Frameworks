@@ -6,7 +6,6 @@ class LoginPage extends BasePage {
     get passwordInput() { return $('[data-test="password"]'); }
     get loginButton() { return $('[data-test="login-submit"]'); }
     
-    // Registration fields
     get firstNameInput() { return $('[data-test="first-name"]'); }
     get lastNameInput() { return $('[data-test="last-name"]'); }
     get dobInput() { return $('[data-test="dob"]'); }
@@ -18,11 +17,7 @@ class LoginPage extends BasePage {
     get phoneInput() { return $('[data-test="phone"]'); }
     get registerButton() { return $('[data-test="register-submit"]'); }
 
-    get successMessage() { return $('.alert-success'); }
-    get errorMessage() { return $('.alert-danger'); }
-
     async clickRegisterLink() {
-//        await this.registerLink.waitForDisplayed();
         await this.registerLink.click();
     }
 
@@ -62,14 +57,6 @@ class LoginPage extends BasePage {
         await browser.pause(2000);
     }
 
-    async isSuccessMessageDisplayed() {
-        try {
-            await this.successMessage.waitForDisplayed({ timeout: 5000 });
-            return true;
-        } catch (error) {
-            return false;
-        }
-    }
 }
 
 module.exports = new LoginPage();

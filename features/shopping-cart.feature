@@ -15,4 +15,4 @@ Feature: Add Product to Shopping Cart
     And I click on shopping cart icon
     Then I should see in the cart the correct product name
     And I should see in the cart the correct product quantity
-    And I should see in the cart the correct product's price
+    And I should see in the cart the correct product price

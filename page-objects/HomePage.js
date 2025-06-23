@@ -5,7 +5,6 @@ class HomePage extends BasePage {
     get searchBox() { return $('[data-test="search-query"]'); }
     get searchButton() { return $('[data-test="search-submit"]'); }
     get languageSelector() { return $('[data-test="language-select"]'); }
-    get productCards() { return $$('[data-test^="product-01"]')[0]; }
     get firstProduct() { return $$('[data-test^="product-01"]')[0]; }
     get homeLink() { return $('[data-test="nav-home"]'); }
 
@@ -17,12 +16,6 @@ class HomePage extends BasePage {
         await this.signInLink.click();
     }
 
-    async searchForProduct(searchTerm) {
-        await this.searchBox.waitForDisplayed({ timeout: 10000 });
-        await this.searchBox.setValue(searchTerm);
-        await this.searchButton.click();
-    }
-
     async clickFirstProduct() {
         await this.firstProduct.click();
     }
@@ -32,14 +25,22 @@ class HomePage extends BasePage {
         return homeLink;
     }
 
-    async getSearchBox() {
-        const searchBox = await this.searchBox;
-        return searchBox;
-    }
-
     async selectLanguage(language) {
         const languageOption = $(`[data-test="lang-${language}"]`);
         await languageOption.click();
+    }
+
+    async expectRedirection(expectedTitleKeyword, expectedUrlPart) {
+        await browser.waitUntil(async () => {
+            const title = await browser.getTitle();
+            return title.includes(expectedTitleKeyword);
+        });
+
+        const currentUrl = await browser.getUrl();
+        const currentTitle = await browser.getTitle();
+
+        currentTitle.should.contain(expectedTitleKeyword);
+        currentUrl.should.contain(expectedUrlPart);
     }
 }
 
