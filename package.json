@@ -38,7 +38,7 @@
     "allure-commandline": "^2.31.2",
     "chai": "^5.2.0",
     "chromedriver": "^138.0.0",
-    "wdio-chromedriver-service": "^9.0.1",
+    "wdio-chromedriver-service": "^8.1.1",
     "wdio-edgedriver-service": "^4.0.0",
     "wdio-geckodriver-service": "^5.0.2",
     "wdio-safaridriver-service": "^3.0.0",
