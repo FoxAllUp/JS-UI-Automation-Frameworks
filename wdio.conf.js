@@ -162,16 +162,25 @@ exports.config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
-    "spec",
-    [
-      "allure",
-      {
-        outputDir: "allure-results",
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-      },
-    ],
+  "spec",
+  [
+    "allure",
+    {
+      outputDir: "allure-results",
+      disableWebdriverStepsReporting: true,
+      disableWebdriverScreenshotsReporting: true,
+    }
   ],
+  [
+    "junit",
+    {
+      outputDir: "./reports/junit",
+      outputFileFormat: function(options) {
+        return `results-${options.cid}.xml`
+      }
+    }
+  ]
+],
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
