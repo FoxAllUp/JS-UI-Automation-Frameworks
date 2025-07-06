@@ -21,6 +21,11 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('Copy EdgeDriver') {
+            steps {
+                sh 'cp "$EDGE_DRIVER_PATH" ./msedgedriver.exe'
+            }
+        }
         stage('Run Tests') {
             steps {
                 sh 'npm test'
