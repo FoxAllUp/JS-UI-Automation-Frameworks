@@ -4,7 +4,7 @@ exports.config = {
   // Runner Configuration
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
-  runner: "local",
+  runner: 'local',
   //
   // ==================
   // Specify Test Files
@@ -22,7 +22,7 @@ exports.config = {
   //
   specs: [
     // ToDo: define location for spec files here
-    "./features/*.feature",
+    './features/*.feature',
   ],
   // Patterns to exclude.
   exclude: [
@@ -52,27 +52,27 @@ exports.config = {
   //
   capabilities: [
     {
-      browserName: "chrome",
-      "goog:chromeOptions": {
+      browserName: 'chrome',
+      'goog:chromeOptions': {
         args: [
           '--headless',
           '--window-size=1920,1080',
           '--start-maximized',
           '--disable-gpu',
-          '--guest'
+          '--guest',
         ],
       },
     },
     {
-      browserName: "firefox",
-      "moz:firefoxOptions": {
-        args: ["--headless", "--width=1920", "--height=1080"]
+      browserName: 'firefox',
+      'moz:firefoxOptions': {
+        args: ['--headless', '--width=1920', '--height=1080'],
       },
     },
     {
-      browserName: "MicrosoftEdge",
-      "ms:edgeOptions": {
-        args: ["--headless", "--disable-gpu", "--window-size=1920,1080"]
+      browserName: 'MicrosoftEdge',
+      'ms:edgeOptions': {
+        args: ['--headless', '--disable-gpu', '--window-size=1920,1080'],
       },
     },
   ],
@@ -84,7 +84,7 @@ exports.config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "warn",
+  logLevel: 'warn',
   //
   // Set specific log levels per logger
   // loggers:
@@ -108,7 +108,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "https://practicesoftwaretesting.com/",
+  baseUrl: 'https://practicesoftwaretesting.com/',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -125,15 +125,13 @@ exports.config = {
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
   services: [
-    "chromedriver",
-    "geckodriver",
+    'chromedriver',
+    'geckodriver',
     [
-      "edgedriver",
+      'edgedriver',
       {
-        // see https://github.com/webdriverio-community/node-edgedriver#options for more
-        // options that can be passed into EdgeDriver directly
         edgedriverOptions: {
-          customEdgeDriverPath: "./msedgedriver.exe", // az a path, ahova a letöltött driver-t tetted
+          customEdgeDriverPath: './msedgedriver.exe',
         },
       },
     ],
@@ -146,7 +144,7 @@ exports.config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: "cucumber",
+  framework: 'cucumber',
 
   //
   // The number of times to retry the entire specfile when it fails as a whole
@@ -162,30 +160,30 @@ exports.config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
-  "spec",
-  [
-    "allure",
-    {
-      outputDir: "allure-results",
-      disableWebdriverStepsReporting: true,
-      disableWebdriverScreenshotsReporting: true,
-    }
+    'spec',
+    [
+      'allure',
+      {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+    [
+      'junit',
+      {
+        outputDir: './reports/junit',
+        outputFileFormat: function (options) {
+          return `results-${options.cid}.xml`;
+        },
+      },
+    ],
   ],
-  [
-    "junit",
-    {
-      outputDir: "./reports/junit",
-      outputFileFormat: function(options) {
-        return `results-${options.cid}.xml`
-      }
-    }
-  ]
-],
 
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
-    require: ["./features/step-definitions/**/*.js"],
+    require: ['./features/step-definitions/**/*.js'],
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -203,7 +201,7 @@ exports.config = {
     // <boolean> fail if there are any undefined or pending steps
     strict: false,
     // <string> (expression) only execute the features or scenarios with tags matching the expression
-    tagExpression: "",
+    tagExpression: '',
     // <number> timeout for step definitions
     timeout: 60000,
     // <boolean> Enable this config to treat undefined definitions as warnings.
@@ -224,7 +222,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   onPrepare: function (config, capabilities) {
-    console.log("Starting test execution...");
+    console.log('Starting test execution...');
   },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
@@ -367,7 +365,7 @@ exports.config = {
    * @param {<Object>} results object containing test results
    */
   onComplete: function (exitCode, config, capabilities, results) {
-    console.log("Test execution completed.");
+    console.log('Test execution completed.');
   },
   /**
    * Gets executed when a refresh happens.

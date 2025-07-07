@@ -1,28 +1,28 @@
 {
-    "searchTerms": {
-      "pliers": "pliers",
-      "hammer": "hammer",
-      "screwdriver": "screwdriver"
-    },
-    "quantities": {
-      "single": "1",
-      "multiple": "2",
-      "bulk": "5"
-    },
-    "languages": {
-      "german": "de",
-      "english": "en",
-      "spanish": "es",
-      "french": "fr",
-      "dutch": "nl",
-      "turkish": "tr"
-    },
-    "homeInDifferentLanguages": {
-      "de": "Home",
-      "en": "Home",
-      "es": "Inicio",
-      "fr": "Accueil",
-      "nl": "Home",
-      "tr": "Anasayfa"
-    }
+  "searchTerms": {
+    "pliers": "pliers",
+    "hammer": "hammer",
+    "screwdriver": "screwdriver"
+  },
+  "quantities": {
+    "single": "1",
+    "multiple": "2",
+    "bulk": "5"
+  },
+  "languages": {
+    "german": "de",
+    "english": "en",
+    "spanish": "es",
+    "french": "fr",
+    "dutch": "nl",
+    "turkish": "tr"
+  },
+  "homeInDifferentLanguages": {
+    "de": "Home",
+    "en": "Home",
+    "es": "Inicio",
+    "fr": "Accueil",
+    "nl": "Home",
+    "tr": "Anasayfa"
   }
+}

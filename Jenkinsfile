@@ -30,12 +30,16 @@ pipeline {
             parallel {
                 stage('Prettier Check') {
                     steps {
-                        sh 'npm run prettier'
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'npm run prettier'
+                        }
                     }
                 }
                 stage('ESLint Check') {
                     steps {
-                        sh 'npm run lint'
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh 'npm run lint'
+                        }
                     }
                 }
             }

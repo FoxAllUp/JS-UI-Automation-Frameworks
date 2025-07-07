@@ -1,28 +1,28 @@
 {
-    "validUser": {
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john.doe.test@example.com",
-      "password": "MyTestPassword123!][{›",
-      "dob": "1990-01-01",
-      "street": "123 Test Street",
-      "postcode": "12345",
-      "city": "Test City",
-      "state": "Test State",
-      "country": "United States of America (the)",
-      "phone": "1234567890"
-    },
-    "existingUser": {
-      "email": "customer2@practicesoftwaretesting.com",
-      "password": "welcome01"
-    },
-    "billingInfo": {
-      "firstName": "John",
-      "lastName": "Doe",
-      "street": "123 Billing Street",
-      "city": "Billing City",
-      "state": "Billing State",
-      "postcode": "54321",
-      "country": "United States of America"
-    }
+  "validUser": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe.test@example.com",
+    "password": "MyTestPassword123!][{›",
+    "dob": "1990-01-01",
+    "street": "123 Test Street",
+    "postcode": "12345",
+    "city": "Test City",
+    "state": "Test State",
+    "country": "United States of America (the)",
+    "phone": "1234567890"
+  },
+  "existingUser": {
+    "email": "customer2@practicesoftwaretesting.com",
+    "password": "welcome01"
+  },
+  "billingInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "street": "123 Billing Street",
+    "city": "Billing City",
+    "state": "Billing State",
+    "postcode": "54321",
+    "country": "United States of America"
   }
+}
