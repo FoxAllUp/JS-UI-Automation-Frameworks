@@ -8,7 +8,12 @@
     "test:firefox": "wdio run config/wdio.firefox.conf.js",
     "test:edge": "wdio run config/wdio.edge.conf.js",
     "test:parallel": "wdio run wdio.conf.js --maxInstances=2",
-    "generate-report": "allure generate allure-results --clean && allure open"
+    "generate-report": "allure generate allure-results --clean && allure open",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --write \"**/*.{js,json,md}\"",
+    "prettier:check": "prettier --check \"**/*.{js,json,md}\"",
+    "format": "npm run prettier && npm run lint"
   },
   "dependencies": {
     "@wdio/allure-reporter": "^9.16.2",
@@ -26,7 +31,7 @@
     "bdd"
   ],
   "author": "Richárd Hanzel",
-  "license": "MIT",
+  "license": "ISC",
   "description": "WebDriverIO BDD automation tests for Practice Software Testing website",
   "devDependencies": {
     "@wdio/allure-reporter": "^9.16.2",
@@ -41,6 +46,11 @@
     "chromedriver": "^138.0.0",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-edgedriver-service": "^3.0.3",
-    "wdio-geckodriver-service": "^5.0.2"
+    "wdio-geckodriver-service": "^5.0.2",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-mocha": "^10.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "prettier": "^3.6.2"
   }
 }
