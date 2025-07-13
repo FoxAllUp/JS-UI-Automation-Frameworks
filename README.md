@@ -1,168 +1,225 @@
-# Automated Testing in JS course PROJECT
+# Automated Testing in JS: UI Automation Framework
 
-This project contains automated tests for the Practice Software Testing website using WebDriverIO (WDIO) with Cucumber BDD framework.
+This project contains automated UI tests for the [Practice Software Testing](https://practicesoftwaretesting.com/) website using WebDriverIO (WDIO) and Cucumber BDD.
+
+---
 
 ## 🚀 Project Overview
 
-This automation framework tests 8 key scenarios (created in module 2):
-1. User Registration
-2. User Login  
-3. View Product Details
-4. Add Product to Shopping Cart
-5. Add Product to Favorites
-6. Complete Checkout Process
-7. Search for Specific Product
-8. Change Website Language
+This BDD UI automation framework covers 8 key user scenarios:
+1. **User Registration**
+2. **User Login**
+3. **View Product Details**
+4. **Add Product to Shopping Cart**
+5. **Add Product to Favorites**
+6. **Complete Checkout Process**
+7. **Search for Specific Product**
+8. **Change Website Language**
 
-## 📋 Prerequisites
+Each scenario is written in Gherkin (`.feature` files) with step definitions and page object models for maintainability.
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-- Chrome browser
-- Firefox browser
-- Microsoft Edge browser
+---
 
-## 🔧 Key Dependencies
+## 🖥️ Prerequisites
 
-- **WebDriverIO**: v8.x - Main automation framework
-- **Cucumber**: v9.x - BDD framework for Gherkin scenarios
-- **Chromedriver**: Latest - Chrome browser automation
-- **Geckodriver**: Latest - Firefox browser automation
-- **Edgedriver**: Latest - Microsoft Edge browser automation
+- Node.js (v14 or higher recommended)
+- npm (v6 or higher recommended)
+- Chrome, Firefox, or Microsoft Edge browsers
+
+---
 
 ## 🛠️ Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/FoxAllUp/JS-UI-Automation-Frameworks.git
+   cd JS-UI-Automation-Frameworks
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. *(Optional but recommended)* **Check browser drivers**
+   - The project uses WebDriverIO, which manages drivers for Chrome, Firefox, and Edge automatically. Make sure you have at least one of these browsers installed.
+
+---
+
+## 🗂️ Project Structure
+
+```
+js-ui-automation-frameworks/
+│
+├── features/                    # Gherkin feature files
+│   ├── user-registration.feature
+│   ├── user-authentication.feature
+│   ├── product-details.feature
+│   ├── shopping-cart.feature
+│   ├── favorites.feature
+│   ├── checkout.feature
+│   ├── search-functionality.feature
+│   └── language-switching.feature
+│
+├── features/step-definitions/   # Step definition files
+├── page-objects/                # Page Object Model classes
+├── test-data/                   # Test data in JSON
+├── config/                      # WDIO config files for browsers
+├── wdio.conf.js                 # Main WDIO config
+├── Jenkinsfile                  # Jenkins CI config
+└── package.json                 # Project scripts and dependencies
+```
+
+---
+
+## 🗝️ Key Features
+
+- **Headless Mode:** All tests run in headless browsers by default.
+- **Parallel Execution:** Speed up with parallel WDIO instances.
+- **Retry Logic:** Tests retry 2 times before marking as failed.
+- **Cross-browser:** Chrome, Firefox, Edge supported.
+- **Page Object Model:** Clean and maintainable code.
+- **Data-driven:** Test data in JSON for easy management.
+- **BDD Framework:** Uses Cucumber for readable test scenarios.
+- **Custom Reporting:** WDIO generates readable reports in `reports/` folder.
+
+---
+
+## 🏷️ Cucumber Tags
+
+Each `.feature` file and/or scenario is tagged to enable flexible test runs:
+
+- `@smoke` – Critical user flows (quick feedback)
+- `@regression` – Full regression suite (all features)
+- Feature-specific tags: `@login`, `@registration`, `@cart`, `@checkout`, `@favorites`, `@product`, `@search`, `@language`
+
+---
+
+## 🧪 Running Tests
+
+### Run All Tests (Headless mode)
 ```bash
-git clone https://github.com/FoxAllUp/JS-UI-Automation-Frameworks.git
-cd js-ui-automation-frameworks
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-## 🏗️ Project Structure
-
-```
-practice-software-testing-automation/
-├── features/                    # Feature files and step definitions
-│   ├── step-definitions/       # Step definition files
-│   └── *.feature              # Gherkin feature files
-├── page-objects/               # Page Object Model classes
-├── config/                     # WDIO configuration files
-├── test-data/                  # Test data files
-└── package.json               # Project dependencies
-```
-
-## 🎯 Running Tests
-
-### Basic Test Execution
-```bash
-# Run all tests
 npm test
 ```
 
-### Browser-Specific Tests
+### Run Smoke Tests Only
 ```bash
-# Chrome (headless)
+npm run test:smoke
+```
+
+### Run Regression Suite
+```bash
+npm run test:regression
+```
+
+### Run Feature-Specific Tests
+```bash
+npm run test:login
+npm run test:cart
+npm run test:favorites
+npm run test:checkout
+npm run test:search
+npm run test:language
+```
+
+### Run Any Tag Ad Hoc
+```bash
+npm run test:tag -- --cucumberOpts.tags='@yourtag'
+# Example:
+npm run test:tag -- --cucumberOpts.tags='@registration'
+```
+
+### Browser-Specific Runs
+```bash
 npm run test:chrome
-
-# Firefox (headless)  
 npm run test:firefox
-
-# Microsoft Edge (headless)
 npm run test:edge
 ```
 
-### Parallel Execution
+### Parallel Execution (2 instances)
 ```bash
-# Run tests in parallel (2 instances)
 npm run test:parallel
 ```
 
-### Development Mode
-```bash
-# Run with browser visible (non-headless)
-npm run test:dev
-```
+---
 
-## 🔧 Configuration
+## 📊 Reporters
 
-### Main Configuration
-- `wdio.conf.ts` - Main WDIO configuration
-- `config/wdio.chrome.conf.js` - Chrome-specific settings
-- `config/wdio.firefox.conf.js` - Firefox-specific settings  
-- `config/wdio.edge.conf.js` - Edge-specific settings
+This project provides multiple reporting formats for test results:
 
-### Key Features
-- **Headless Mode**: All tests run in headless mode by default
-- **Parallel Execution**: Tests run with 2 parallel instances
-- **Retry Logic**: Tests retry 2 times before marking as failed
-- **Multiple Browsers**: Support for Chrome, Firefox and Microsoft Edge
-- **BDD Framework**: Uses Cucumber for readable test scenarios
+- **Spec Reporter** (default): Human-readable test output in the console.
+- **Allure Reporter**: Generates rich, interactive HTML reports.
+  - After a test run, open the report with:
+    ```bash
+    npm run report:allure
+    ```
+  - (You may need to install [Allure Commandline](https://docs.qameta.io/allure/#_installing_a_commandline) globally.)
+- **JUnit Reporter**: Generates XML reports (for CI integration, e.g., Jenkins).
+- **HTML Reporter**: Generates static HTML report files.
+- **JSON Reporter**: Easy machine parsing for custom dashboards.
 
-## 📊 Test Reports
+> **Reports are output to the `reports/` directory by default.**
 
-WDIO generates built-in reports after test execution:
-- Console output with test results summary 
-- **Allure** - Interactive HTML reports with screenshots, step details, and trend analysis
-- Built-in **spec reporter** shows real-time test progress
+---
 
-## 🧪 Test Data
+## 🧹 Code Quality: Linting, Formatting, and Best Practices
 
-Test data is managed in the `test-data/` directory:
-- `users.json` - Test user accounts
-- `products.json` - Product information
-- `testData.js` - Data management utilities
+- **ESLint**: Enforces JavaScript best practices and coding style.
+  - Run lint checks:
+    ```bash
+    npm run lint
+    ```
+  - Auto-fix linting errors:
+    ```bash
+    npm run lint:fix
+    ```
+- **Prettier**: Opinionated code formatter for consistent style.
+  - Format code:
+    ```bash
+    npm run format
+    ```
 
-## 🎨 Page Object Model
+- **EditorConfig**: Ensures consistent indentation and line endings across different editors.
 
-The framework uses Page Object Model (POM) for maintainable code:
-- `BasePage.js` - Common page methods and utilities
-- `HomePage.js` - Homepage interactions and navigation
-- `LoginPage.js` - Login and registration functionality
-- `ProductPage.js` - Product detail operations
-- `CartPage.js` - Shopping cart actions
-- `FavoritesPage.js` - Favorites/wishlist management
-- `CheckoutPage.js` - Checkout process handling
-- `SearchResultsPage.js` - Search results interactions
+- **.gitignore**: Keeps unnecessary files (like `node_modules`, report outputs) out of version control.
 
-## 🔄 CI/CD Integration
+---
 
-The project is ready for CI/CD integration with:
-- Headless browser execution
-- JSON/XML report generation
-- Parallel test execution
-- Configurable browser selection
+## 🏗️ CI/CD Integration
 
-## 📝 Writing New Tests
+### Jenkinsfile runs both suites:
+- **Smoke Stage:** Runs `npm run test:smoke`
+- **Regression Stage:** Runs `npm run test:regression`
+- Both stages are separated for fast feedback and full coverage.
 
-1. Create/update `.feature` files in the `features/` directory
-2. Implement step definitions in `features/step-definitions/`
-3. Add page objects in `page-objects/` directory
-4. Update test data in `test-data/` as needed
+---
 
-Example feature:
-```gherkin
-Feature: User Registration
-  As a new user
-  I want to create an account
-  So that I can access personalized features
+## 🏷️ Summary Table
 
-  Background: 
-    Given I open the Practice Software Testing homepage
+| Tool              | Purpose                       | Run with                 |
+|-------------------|-------------------------------|--------------------------|
+| Allure Reporter   | Interactive HTML reports      | `npm run report:allure`  |
+| JUnit Reporter    | CI integration, XML output    | (runs on test)           |
+| HTML Reporter     | Human-readable HTML file      | (runs on test)           |
+| JSON Reporter     | Machine-readable test data    | (runs on test)           |
+| ESLint            | Linting JavaScript code       | `npm run lint`           |
+| Prettier          | Code formatting               | `npm run format`         |
 
-  Scenario: User successfully creates a new account
-    Given I am on the Practice Software Testing homepage
-    When I click the "Sign in" button
-    Then I should be redirected to the Login page
-    When I click on "Register your account"
-    And I fill in all required registration fields with valid information
-    And I click the "Register" button
-    Then I should be redirected to the Login page
-```
+---
+
+*See the `wdio.conf.js` for configuration details of each reporter.*
+
+---
+
+## ✍️ Adding or Updating Tests
+
+1. Create/update `.feature` files in `features/`
+2. Add step definitions in `features/step-definitions/`
+3. Update or add page objects in `page-objects/`
+4. Update or add test data in `test-data/`
+5. Tag new scenarios appropriately
+
+---
 
 ## 📄 License
 
