@@ -1,3 +1,4 @@
+@regression @product
 Feature: View Product Details
   As a customer
   I want to view detailed information about products

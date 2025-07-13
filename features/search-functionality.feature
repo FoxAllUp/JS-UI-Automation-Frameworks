@@ -1,3 +1,4 @@
+@regression @search
 Feature: Search for Specific Product
   As a customer
   I want to search for products

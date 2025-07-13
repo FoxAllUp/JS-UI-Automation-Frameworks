@@ -1,3 +1,4 @@
+@regression @language
 Feature: Change Website Language
   As a user
   I want to change the website language

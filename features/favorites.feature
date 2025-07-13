@@ -1,3 +1,4 @@
+@regression @favorites
 Feature: Add Product to Favorites
   As a logged-in customer
   I want to add products to my favorites list

@@ -3,7 +3,7 @@ pipeline {
     environment {
         NODE_ENV = 'test'
     }
-      triggers {
+    triggers {
         cron('H H/2 * * *')
     }
     tools {
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Copy EdgeDriver') {
             steps {
-                sh 'cp "$EDGE_DRIVER_PATH" ./msedgedriver.exe'
+                sh 'cp \"$EDGE_DRIVER_PATH\" ./msedgedriver.exe'
             }
         }
         stage('Code Quality Check') {
@@ -44,24 +44,15 @@ pipeline {
                 }
             }
         }
-        stage('Run Tests') {
+        stage('Run Smoke Tests') {
             steps {
-                sh 'npm test'
+                sh 'npm run test:smoke'
             }
         }
-        stage('Archive Results') {
-            when {
-                expression { fileExists('reports') }
-            }
+        stage('Run Regression Tests') {
             steps {
-                archiveArtifacts artifacts: 'reports/**/*.*', fingerprint: true
+                sh 'npm run test:regression'
             }
-        }
-    }
-    post {
-        always {
-            junit 'reports/**/*.xml'
-            cleanWs()
         }
     }
 }

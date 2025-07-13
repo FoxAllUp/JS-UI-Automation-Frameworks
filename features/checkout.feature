@@ -1,3 +1,4 @@
+@smoke @checkout
 Feature: Complete Checkout Process
   As a customer
   I want to complete my purchase

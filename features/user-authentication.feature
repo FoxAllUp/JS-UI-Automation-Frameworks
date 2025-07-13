@@ -1,3 +1,4 @@
+@smoke @login
 Feature: User Login
   As an existing user
   I want to log into my account

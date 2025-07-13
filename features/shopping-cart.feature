@@ -1,3 +1,4 @@
+@smoke @cart
 Feature: Add Product to Shopping Cart
   As a customer
   I want to add products to my shopping cart

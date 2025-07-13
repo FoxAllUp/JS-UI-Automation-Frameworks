@@ -1,3 +1,4 @@
+@smoke @registration
 Feature: User Registration
   As a new user
   I want to create an account
